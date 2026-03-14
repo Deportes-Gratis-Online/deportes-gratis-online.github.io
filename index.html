@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ESPN TV LIVE — Deportes en Vivo</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700;900&family=Barlow+Condensed:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --green-dark: #064e3b;
+  --gold: #facc15;
+  --red: #dc2626;
+  --red-dark: #b91c1c;
+  --white: #ffffff;
+  --black: #000000;
+  --search-bg: rgba(255,255,255,0.1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* SEARCH */
+.search-container {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+}
+.search-input {
+  width: 100%;
+  padding: 12px 50px 12px 20px;
+  background: var(--search-bg);
+  border: 2px solid rgba(250,204,21,.3);
+  border-radius: 25px;
+  color: var(--white);
+  font-family: 'Oswald', sans-serif;
+  font-size: 18px;
+  transition: .3s;
+}
+.search-input::placeholder { color: rgba(255,255,255,.7); }
+.search-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(255,255,255,0.15);
+}
+.search-clear {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,.7);
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  transition: .3s;
+}
+.search-container.has-text .search-clear { opacity: 1; }
+.no-results {
+  text-align: center;
+  padding: 40px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  color: rgba(255,255,255,.7);
+}
+body {
+  background: var(--green-dark);
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  min-height: 100vh;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at top left, rgba(5,150,105,.18) 0%, transparent 60%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── HEADER ── */
+header {
+  position: relative; z-index: 10;
+  text-align: center; padding: 40px 16px;
+  border-bottom: 1px solid rgba(250,204,21,.15);
+}
+.logo-badge {
+  display: inline-block; background: var(--red); color: var(--white);
+  font-family: 'Oswald', sans-serif; font-weight: 900; padding: 4px 18px;
+  border-radius: 4px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;
+}
+header h1 { font-family: 'Oswald', sans-serif; font-size: clamp(30px, 7vw, 60px); text-transform: uppercase; }
+header h1 span { color: var(--gold); }
+
+/* ── TABS ── */
+.tabs-wrapper {
+  position: relative; z-index: 10;
+  display: flex; gap: 10px; justify-content: center;
+  padding: 20px; flex-wrap: wrap;
+}
+.tab-btn {
+  background: rgba(0,0,0,.4); border: 1px solid rgba(255,255,255,.1);
+  color: white; padding: 8px 25px; border-radius: 20px;
+  font-family: 'Oswald', sans-serif; cursor: pointer; transition: .3s;
+}
+.tab-btn.active { background: var(--gold); color: var(--black); border-color: var(--gold); }
+
+/* ── SECCIONES ── */
+.container { position: relative; z-index: 10; max-width: 1100px; margin: 0 auto; padding: 0 20px 40px; }
+
+.section-title {
+  display: flex; align-items: center; gap: 15px;
+  margin: 40px 0 20px; font-family: 'Oswald', sans-serif;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.section-title h2 { font-size: 24px; }
+.section-title h2 span { color: var(--gold); }
+.section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(250,204,21,.3), transparent); }
+
+/* ── GRID Y CARDS ── */
+.games-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+
+.game-card {
+  background: var(--white); border-radius: 15px; overflow: hidden;
+  color: var(--black); text-align: center; transition: .3s;
+  display: flex; flex-direction: column; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.game-card:hover { transform: translateY(-5px); }
+.card-img { background: #064e3b; padding: 20px; }
+.teams { display: flex; justify-content: center; align-items: center; gap: 15px; }
+.team-logo { width: 55px; height: 55px; object-fit: contain; }
+.vs { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 900; color: var(--red); }
+.match-info { padding: 15px; font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; }
+.watch-btn {
+  display: block; margin: 0 15px 15px; padding: 12px;
+  background: var(--red); color: white; text-decoration: none;
+  border-radius: 30px; font-family: 'Oswald', sans-serif; font-weight: 700;
+  transition: .3s;
+}
+.watch-btn:hover { background: var(--red-dark); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-badge">⚡TV LIVE</div>
+  <h1>DEPORTES <span>EN VIVO</span></h1>
+</header>
+
+<div class="tabs-wrapper">
+  <button class="tab-btn active" onclick="setTab('ALL', this)">TODOS</button>
+  <button class="tab-btn" onclick="setTab('FUTBOL', this)">⚽ FÚTBOL</button>
+  <button class="tab-btn" onclick="setTab('BEISBOL', this)">⚾ BÉISBOL</button>
+</div>
+
+<!-- Search Bar -->
+<div class="search-container">
+  <input type="text" class="search-input" id="searchInput" placeholder="🔍 Buscar equipos (ej: España, Brasil)...">
+  <button class="search-clear" id="searchClear">✕</button>
+</div>
+
+<div class="container" id="content">
+
+
+<script>
+const games = [
+  // FÚTBOL
+  { sport: "FUTBOL", t1: "Real Madrid", t2: "Elche C.F.", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/86.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/3751.png&h=72&w=72", url: "Partido3.html" },
+  { sport: "FUTBOL", t1: "Inter Miami", t2: "Charlotte", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/20232.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/21300.png&h=72&w=72", url: "Partido4.html" },
+  { sport: "FUTBOL", t1: "Pumas UNAM", t2: "Cruz Azul", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/233.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/218.png&h=72&w=72", url: "Partido5.html" },
+  
+  // BÉISBOL
+  { sport: "BEISBOL", t1: "Venezuela", t2: "Japon", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/ven.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/jpn.png&h=72&w=72", url: "Partido1.html" },
+  { sport: "BEISBOL", t1: "Puerto Rico", t2: "Italia", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/pur.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/ita.png&h=72&w=72", url: "Partido2.html" },
+  { sport: "BEISBOL", t1: "Cuba", t2: "Venezuela", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/cub.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/ven.png&h=72&w=72", url: "TU_LINK_BLOGGER_6" }
+];
+
+function setTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const searchTerm = document.getElementById('searchInput').value;
+  render(tab, searchTerm);
+}
+
+function createSection(title, filteredGames) {
+  if (filteredGames.length === 0) return `
+    <div class="no-results">No hay resultados para tu búsqueda</div>
+  `;
+  return `
+    <div class="section-title"><h2>${title}</h2></div>
+    <div class="games-grid">
+      ${filteredGames.map(g => `
+        <div class="game-card">
+          <div class="card-img">
+            <div class="teams">
+              <img src="${g.l1}" class="team-logo">
+              <span class="vs">VS</span>
+              <img src="${g.l2}" class="team-logo">
+            </div>
+          </div>
+          <div class="match-info">${g.t1} vs ${g.t2}</div>
+          <a href="${g.url}" target="_blank" rel="noopener" class="watch-btn">VER PARTIDO AHORA</a>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function render(filter = 'ALL', searchTerm = '') {
+  const container = document.getElementById('content');
+  let html = "";
+
+  if (filter === 'ALL' || filter === 'FUTBOL') {
+    let futbol = games.filter(g => g.sport === 'FUTBOL');
+    if (searchTerm) {
+      futbol = futbol.filter(g => g.t1.toLowerCase().includes(searchTerm.toLowerCase()) || g.t2.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+    html += createSection('⚽ Partidos de <span>Fútbol</span>', futbol);
+  }
+
+  if (filter === 'ALL' || filter === 'BEISBOL') {
+    let beisbol = games.filter(g => g.sport === 'BEISBOL');
+    if (searchTerm) {
+      beisbol = beisbol.filter(g => g.t1.toLowerCase().includes(searchTerm.toLowerCase()) || g.t2.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+    html += createSection('⚾ Partidos de <span>Béisbol</span>', beisbol);
+  }
+
+  container.innerHTML = html;
+}
+
+// Search functionality
+function performSearch() {
+  const searchTerm = document.getElementById('searchInput').value;
+  const activeTab = document.querySelector('.tab-btn.active').textContent.trim() === 'TODOS' ? 'ALL' :
+                   document.querySelector('.tab-btn.active').textContent.includes('FÚTBOL') ? 'FUTBOL' : 'BEISBOL';
+  render(activeTab, searchTerm);
+  
+  const container = document.getElementById('searchInput').parentElement;
+  if (searchTerm) {
+    container.classList.add('has-text');
+  } else {
+    container.classList.remove('has-text');
+  }
+}
+
+document.getElementById('searchInput').addEventListener('keyup', performSearch);
+document.getElementById('searchClear').addEventListener('click', () => {
+  document.getElementById('searchInput').value = '';
+  performSearch();
+});
+
+// Iniciar
+render();
+
+</script>
+</body>
+</html>
