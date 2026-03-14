@@ -136,8 +136,6 @@ header h1 span { color: var(--gold); }
 }
 .watch-btn:hover { background: var(--red-dark); }
 
-/* ── ADSTERRA CONTAINERS ── */
-/* Estos estilos mantienen tus anuncios centrados y adaptables */
 .ad-slot {
   width: 100%;
   max-width: 1100px;
@@ -147,19 +145,9 @@ header h1 span { color: var(--gold); }
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60px;
+  min-height: 95px;
   position: relative;
   z-index: 10;
-  /* El fondo y borde punteado es para que veas dónde están, puedes borrarlos cuando pongas los anuncios */
-  background: rgba(0,0,0,0.2);
-  border: 1px dashed rgba(250,204,21,.5);
-  border-radius: 10px;
-}
-.ad-slot-text {
-  color: rgba(255,255,255,0.4);
-  font-family: 'Oswald', sans-serif;
-  font-size: 12px;
-  letter-spacing: 1px;
 }
 </style>
 </head>
@@ -171,16 +159,16 @@ header h1 span { color: var(--gold); }
 </header>
 
 <div class="ad-slot">
-  <span class="ad-slot-text"><script>
-  atOptions = {
-    'key' : '356f2aeaddf336f3694115e3e88dc452',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/356f2aeaddf336f3694115e3e88dc452/invoke.js"></script></span>
+  <script type="text/javascript">
+    atOptions = {
+      'key' : '356f2aeaddf336f3694115e3e88dc452',
+      'format' : 'iframe',
+      'height' : 90,
+      'width' : 728,
+      'params' : {}
+    };
+  </script>
+  <script type="text/javascript" src="https://www.highperformanceformat.com/356f2aeaddf336f3694115e3e88dc452/invoke.js"></script>
 </div>
 
 <div class="tabs-wrapper">
@@ -194,24 +182,17 @@ header h1 span { color: var(--gold); }
   <button class="search-clear" id="searchClear">✕</button>
 </div>
 
-<div class="ad-slot">
-  <span class="ad-slot-text">ADSTERRA NATIVE BANNER AQUÍ</span>
-</div>
-
 <div class="container" id="content">
 </div>
 
 <script>
 const games = [
-  // FÚTBOL
   { sport: "FUTBOL", t1: "Real Madrid", t2: "Elche C.F.", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/86.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/3751.png&h=72&w=72", url: "Partido3.html" },
   { sport: "FUTBOL", t1: "Inter Miami", t2: "Charlotte", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/20232.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/21300.png&h=72&w=72", url: "Partido4.html" },
   { sport: "FUTBOL", t1: "Pumas UNAM", t2: "Cruz Azul", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/233.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/218.png&h=72&w=72", url: "Partido5.html" },
-  
-  // BÉISBOL
   { sport: "BEISBOL", t1: "Venezuela", t2: "Japon", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/ven.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/jpn.png&h=72&w=72", url: "Partido1.html" },
   { sport: "BEISBOL", t1: "Puerto Rico", t2: "Italia", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/pur.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/ita.png&h=72&w=72", url: "Partido2.html" },
-  { sport: "BEISBOL", t1: "Cuba", t2: "Venezuela", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/cub.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/ven.png&h=72&w=72", url: "TU_LINK_BLOGGER_6" }
+  { sport: "BEISBOL", t1: "Cuba", t2: "Venezuela", l1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/cub.png&h=72&w=72", l2: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/ven.png&h=72&w=72", url: "TU_LINK_6" }
 ];
 
 function setTab(tab, btn) {
@@ -222,9 +203,7 @@ function setTab(tab, btn) {
 }
 
 function createSection(title, filteredGames) {
-  if (filteredGames.length === 0) return `
-    <div class="no-results">No hay resultados para tu búsqueda</div>
-  `;
+  if (filteredGames.length === 0) return `<div class="no-results">No hay resultados</div>`;
   return `
     <div class="section-title"><h2>${title}</h2></div>
     <div class="games-grid">
@@ -248,39 +227,24 @@ function createSection(title, filteredGames) {
 function render(filter = 'ALL', searchTerm = '') {
   const container = document.getElementById('content');
   let html = "";
-
   if (filter === 'ALL' || filter === 'FUTBOL') {
     let futbol = games.filter(g => g.sport === 'FUTBOL');
-    if (searchTerm) {
-      futbol = futbol.filter(g => g.t1.toLowerCase().includes(searchTerm.toLowerCase()) || g.t2.toLowerCase().includes(searchTerm.toLowerCase()));
-    }
+    if (searchTerm) futbol = futbol.filter(g => g.t1.toLowerCase().includes(searchTerm.toLowerCase()) || g.t2.toLowerCase().includes(searchTerm.toLowerCase()));
     html += createSection('⚽ Partidos de <span>Fútbol</span>', futbol);
   }
-
   if (filter === 'ALL' || filter === 'BEISBOL') {
     let beisbol = games.filter(g => g.sport === 'BEISBOL');
-    if (searchTerm) {
-      beisbol = beisbol.filter(g => g.t1.toLowerCase().includes(searchTerm.toLowerCase()) || g.t2.toLowerCase().includes(searchTerm.toLowerCase()));
-    }
+    if (searchTerm) beisbol = beisbol.filter(g => g.t1.toLowerCase().includes(searchTerm.toLowerCase()) || g.t2.toLowerCase().includes(searchTerm.toLowerCase()));
     html += createSection('⚾ Partidos de <span>Béisbol</span>', beisbol);
   }
-
   container.innerHTML = html;
 }
 
-// Search functionality
 function performSearch() {
   const searchTerm = document.getElementById('searchInput').value;
   const activeTab = document.querySelector('.tab-btn.active').textContent.trim() === 'TODOS' ? 'ALL' :
                    document.querySelector('.tab-btn.active').textContent.includes('FÚTBOL') ? 'FUTBOL' : 'BEISBOL';
   render(activeTab, searchTerm);
-  
-  const container = document.getElementById('searchInput').parentElement;
-  if (searchTerm) {
-    container.classList.add('has-text');
-  } else {
-    container.classList.remove('has-text');
-  }
 }
 
 document.getElementById('searchInput').addEventListener('keyup', performSearch);
@@ -289,9 +253,7 @@ document.getElementById('searchClear').addEventListener('click', () => {
   performSearch();
 });
 
-// Iniciar
 render();
-
 </script>
 
 </body>
