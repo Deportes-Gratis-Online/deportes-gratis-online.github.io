@@ -136,16 +136,16 @@ header h1 span { color: var(--gold); }
 }
 .watch-btn:hover { background: var(--red-dark); }
 
-.ad-slot {
+/* ── NUEVO ESTILO PARA ANUNCIOS ── */
+.ad-banner {
   width: 100%;
-  max-width: 1100px;
+  max-width: 320px;
   margin: 15px auto;
-  padding: 10px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 95px;
+  min-height: 50px;
   position: relative;
   z-index: 10;
 }
@@ -158,17 +158,17 @@ header h1 span { color: var(--gold); }
   <h1>DEPORTES <span>EN VIVO</span></h1>
 </header>
 
-<div class="ad-slot">
+<div class="ad-banner">
   <script>
-  atOptions = {
-    'key' : 'fd2726d239b1526afe66a286ec755509',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/fd2726d239b1526afe66a286ec755509/invoke.js"></script>
+    atOptions = {
+      'key' : 'fd2726d239b1526afe66a286ec755509',
+      'format' : 'iframe',
+      'height' : 50,
+      'width' : 320,
+      'params' : {}
+    };
+  </script>
+  <script src="https://www.highperformanceformat.com/fd2726d239b1526afe66a286ec755509/invoke.js"></script>
 </div>
 
 <div class="tabs-wrapper">
@@ -182,7 +182,33 @@ header h1 span { color: var(--gold); }
   <button class="search-clear" id="searchClear">✕</button>
 </div>
 
+<div class="ad-banner">
+  <script>
+    atOptions = {
+      'key' : 'fd2726d239b1526afe66a286ec755509',
+      'format' : 'iframe',
+      'height' : 50,
+      'width' : 320,
+      'params' : {}
+    };
+  </script>
+  <script src="https://www.highperformanceformat.com/fd2726d239b1526afe66a286ec755509/invoke.js"></script>
+</div>
+
 <div class="container" id="content">
+</div>
+
+<div class="ad-banner" style="margin-bottom: 40px;">
+  <script>
+    atOptions = {
+      'key' : 'fd2726d239b1526afe66a286ec755509',
+      'format' : 'iframe',
+      'height' : 50,
+      'width' : 320,
+      'params' : {}
+    };
+  </script>
+  <script src="https://www.highperformanceformat.com/fd2726d239b1526afe66a286ec755509/invoke.js"></script>
 </div>
 
 <script>
@@ -243,7 +269,7 @@ function render(filter = 'ALL', searchTerm = '') {
 function performSearch() {
   const searchTerm = document.getElementById('searchInput').value;
   const activeTab = document.querySelector('.tab-btn.active').textContent.trim() === 'TODOS' ? 'ALL' :
-                   document.querySelector('.tab-btn.active').textContent.includes('FÚTBOL') ? 'FUTBOL' : 'BEISBOL';
+                    document.querySelector('.tab-btn.active').textContent.includes('FÚTBOL') ? 'FUTBOL' : 'BEISBOL';
   render(activeTab, searchTerm);
 }
 
