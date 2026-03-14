@@ -135,6 +135,32 @@ header h1 span { color: var(--gold); }
   transition: .3s;
 }
 .watch-btn:hover { background: var(--red-dark); }
+
+/* ── ADSTERRA CONTAINERS ── */
+/* Estos estilos mantienen tus anuncios centrados y adaptables */
+.ad-slot {
+  width: 100%;
+  max-width: 1100px;
+  margin: 15px auto;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+  position: relative;
+  z-index: 10;
+  /* El fondo y borde punteado es para que veas dónde están, puedes borrarlos cuando pongas los anuncios */
+  background: rgba(0,0,0,0.2);
+  border: 1px dashed rgba(250,204,21,.5);
+  border-radius: 10px;
+}
+.ad-slot-text {
+  color: rgba(255,255,255,0.4);
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
 </style>
 </head>
 <body>
@@ -143,30 +169,28 @@ header h1 span { color: var(--gold); }
   <div class="logo-badge">⚡TV LIVE</div>
   <h1>DEPORTES <span>EN VIVO</span></h1>
 </header>
-<script>
-  atOptions = {
-    'key' : 'fd2726d239b1526afe66a286ec755509',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/fd2726d239b1526afe66a286ec755509/invoke.js"></script>
+
+<div class="ad-slot">
+  <span class="ad-slot-text">ADSTERRA BANNER 728x90 AQUÍ</span>
+</div>
+
 <div class="tabs-wrapper">
   <button class="tab-btn active" onclick="setTab('ALL', this)">TODOS</button>
   <button class="tab-btn" onclick="setTab('FUTBOL', this)">⚽ FÚTBOL</button>
   <button class="tab-btn" onclick="setTab('BEISBOL', this)">⚾ BÉISBOL</button>
 </div>
 
-<!-- Search Bar -->
 <div class="search-container">
   <input type="text" class="search-input" id="searchInput" placeholder="🔍 Buscar equipos (ej: España, Brasil)...">
   <button class="search-clear" id="searchClear">✕</button>
 </div>
 
-<div class="container" id="content">
+<div class="ad-slot">
+  <span class="ad-slot-text">ADSTERRA NATIVE BANNER AQUÍ</span>
+</div>
 
+<div class="container" id="content">
+</div>
 
 <script>
 const games = [
@@ -260,5 +284,6 @@ document.getElementById('searchClear').addEventListener('click', () => {
 render();
 
 </script>
+
 </body>
 </html>
